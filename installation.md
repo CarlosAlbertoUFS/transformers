@@ -6,7 +6,7 @@ Install the [Anaconda distribution](https://www.anaconda.com/products/individual
 
 1. Download the [environment.yaml](https://github.com/jamescalam/transformers/blob/main/environment.yaml) for the course.
 
-2. In *Anaconda prompt*, navigate to the directory containing the *environment.yaml* and write `conda env create -f environment.yaml`.
+2. In *Anaconda prompt*, navigate to the directory containing the *environment.yaml* and write `CONDA_SUBDIR=osx-64 conda env create -f environment.yaml`.
 
 3. Activate the new environment with `conda activate ml`.
 
@@ -16,15 +16,24 @@ Install the [Anaconda distribution](https://www.anaconda.com/products/individual
 
 [See here](https://towardsdatascience.com/how-to-setup-python-for-machine-learning-173cb25f0206?sk=8e25eb341c8910209ff683071650c180) for more detailed guide of steps 1-2, 5-7.
 
-1. Create a new Python environment with `conda create -n ml python=3.8.5 anaconda`.
+1. Create a new Python environment with `CONDA_SUBDIR=osx-64 conda create -n ml python=3.8.5 anaconda`.
+- `CONDA_SUBDIR=osx-arm64 conda create -n ml python=3.9 -c conda-forge`
+- `conda env config vars set CONDA_SUBDIR=osx-arm64`
 
 2. Activate the new environment with `conda activate ml`.
 
 3. Navigate to directory containing the *requirements.txt* of this repository ([here](https://github.com/jamescalam/transformers/blob/main/requirements.txt)).
 
-4. Write `pip install -r requirements.txt`.
+4. Write `pip install -r requirements.txt --use-pep517`.
 
 5. Move onto the **Installation of PyTorch** section.
+
+
+## Installation TensorFlow
+1. Install with code bellow: 
+  `conda install -c apple tensorflow-deps && \`
+  `python -m pip install tensorflow-macos && \`
+  `python -m pip install tensorflow-metal`
 
 ## Installation of PyTorch
 
@@ -54,6 +63,5 @@ Once your environment is setup, it can be added as a kernel to Jupyter lab/noteb
 
 1. In *Anaconda prompt* write `conda active ml`.
 
-2. Then write `python -m ipykernel install --user --name ml --display-name "ML"`
-
+2. Then write `python3 -m pip install ipykernel && python3 -m ipykernel install --user --name ml --display-name "ML"`
 3. The kernel has been installed, switch back to *base* with `conda activate base` then open Jupyter with `jupyter lab`/`jupyter notebook`.
